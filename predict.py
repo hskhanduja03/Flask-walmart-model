@@ -2,9 +2,12 @@ from flask import Flask, request, jsonify
 import tensorflow as tf
 from tensorflow.keras.models import load_model
 import numpy as np
+from flask_cors import CORS
+
 
 app = Flask(__name__)
 
+CORS(app)
 # Load the pre-trained model
 model = load_model('retail.keras')
 
