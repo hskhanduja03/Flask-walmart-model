@@ -3,3 +3,5 @@ Werkzeug==2.2.0
 tensorflow==2.17.0
 numpy==1.23.5
 flask-cors
+joblib==1.2.0
+huggingface-hub==0.16.0
