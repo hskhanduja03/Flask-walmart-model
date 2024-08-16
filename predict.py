@@ -20,6 +20,23 @@ model_path = hf_hub_download(
 )
 model_rf = joblib.load(model_path)
 
+
+
+
+
+token = "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"  # Replace with your actual token
+model_path2 = hf_hub_download(
+    repo_id='arnab12345678/price_optimizer_final',
+    filename='linear_regression_model.pkl',
+    token=token
+)
+model_sp = joblib.load(model_path2)
+
+
+
+
+
+
 @app.route('/')
 def home():
     return 'Welcome to the Flask API!'
@@ -61,6 +78,26 @@ def predict_rf():
         # Convert features to a numpy array and reshape for prediction
         input_data = np.array([features])
         predictions = model_rf.predict(input_data)
+        
+        return jsonify({'predictions': predictions.tolist()})
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+    
+@app.route('/predict_sp', methods=['POST'])
+def predict_sp():
+    data = request.get_json()  # Expecting JSON data
+    if not data:
+        return jsonify({'error': 'No input data provided'}), 400
+
+    try:
+        # Extract features from the incoming JSON
+        features = [
+            data[0]
+        ]
+        
+        # Convert features to a numpy array and reshape for prediction
+        input_data = np.array([features])
+        predictions = model_sp.predict(input_data)
         
         return jsonify({'predictions': predictions.tolist()})
     except Exception as e:
