@@ -5,4 +5,4 @@ numpy==1.23.5
 flask-cors
 joblib==1.2.0
 huggingface-hub==0.24.5 
-scikit-learn==1.5.1
+scikit-learn==1.0.2
